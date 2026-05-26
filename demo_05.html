@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAHRIA TOWN KARACHI | Properties & Accounting</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- CSS Variables --- */
+        :root {
+            --primary-black: #000000; /* Black for Logo Match */
+            --primary-gold: #C6A87C;   /* Gold for Logo Match */
+            --text-dark: #222222;
+            --text-light: #666666;
+            --bg-light: #F9F9F9;
+            --white: #ffffff;
+            --radius-pill: 50px;
+            --shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            color: var(--text-dark);
+            background-color: var(--white);
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- Header (White Background for Black Logo) --- */
+        header {
+            background: var(--white); /* White BG */
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05); /* Subtle shadow */
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .navbar {
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+            padding: 0 24px;
+            max-width: 1400px;
+        }
+
+        /* Logo Container */
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        /* Image Tag Fix (image -> img) */
+        .logo img {
+            height: 45px; /* Adjust as needed */
+            width: auto;
+            object-fit: contain;
+        }
+
+        /* Nav Links (Dark Text on White BG) */
+        .nav-links { display: flex; gap: 30px; font-weight: 500; font-size: 15px; }
+        .nav-links a { color: var(--text-dark); }
+        .nav-links a:hover { color: var(--primary-gold); }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .globe-icon { font-size: 18px; color: #666; cursor: pointer; }
+        
+        /* Buttons Theme: Black & Gold */
+        .btn-login { 
+            padding: 8px 20px; 
+            border-radius: 4px; 
+            font-size: 14px; 
+            font-weight: 600; 
+            color: var(--text-dark); 
+            background: transparent; 
+            cursor: pointer; 
+        }
+        
+        .btn-signup { 
+            padding: 8px 20px; 
+            border-radius: 4px; 
+            font-size: 14px; 
+            font-weight: 600; 
+            color: var(--primary-gold); /* Gold Text */
+            background: var(--primary-black); /* Black Background */
+            cursor: pointer; 
+            transition: 0.3s;
+        }
+        .btn-signup:hover { background: #333; }
+
+        /* --- Hero Section --- */
+        .hero { padding-top: 80px; background: #F4F4F4; padding-bottom: 40px; }
+        .hero-banner {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://picsum.photos/seed/btkskyline/1600/600');
+            background-size: cover; background-position: center; height: 350px;
+            display: flex; align-items: center; justify-content: center; flex-direction: column;
+            color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .hero-banner h1 { font-size: 2.5rem; margin-bottom: 10px; }
+
+        /* --- Search Bar --- */
+        .search-wrapper {
+            max-width: 900px; margin: -30px auto 0; position: relative; z-index: 10; padding: 0 20px;
+        }
+        .search-bar {
+            background: var(--white); border-radius: var(--radius-pill);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15); display: flex;
+            align-items: center; padding: 8px; border: 1px solid #e0e0e0;
+        }
+        .search-part { flex: 1; padding: 10px 20px; border-right: 1px solid #eee; position: relative; }
+        .search-part:last-of-type { border-right: none; flex: 0 0 auto; }
+        .search-part label { display: block; font-size: 10px; font-weight: 800; letter-spacing: 1px; color: #888; margin-bottom: 2px; }
+        .search-part select, .search-part input {
+            width: 100%; border: none; outline: none; font-size: 14px; color: #444; background: transparent; cursor: pointer; font-weight: 600;
+        }
+        /* Black Search Button */
+        .search-btn {
+            background: var(--primary-black); color: var(--white); width: 48px; height: 48px; border-radius: 50%; border: none; cursor: pointer; font-size: 16px; transition: 0.2s;
+        }
+        .search-btn:hover { background: var(--primary-gold); color: var(--primary-black); transform: rotate(90deg); }
+
+        /* --- Properties Grid --- */
+        .section-container { max-width: 1280px; margin: 0 auto; padding: 60px 20px 60px; }
+        .section-title { 
+            font-size: 1.5rem; 
+            font-weight: 700; 
+            margin-bottom: 24px; 
+            color: var(--primary-black);
+            border-bottom: 2px solid var(--primary-gold);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+        
+        .properties-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+        
+        .property-card { 
+            cursor: pointer; 
+            border: 1px solid #eee;
+            border-radius: 8px; 
+            overflow: hidden;
+            transition: 0.3s;
+            background: #fff;
+        }
+        .property-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); border-color: var(--primary-gold); }
+
+        .card-image { position: relative; width: 100%; height: 220px; overflow: hidden; }
+        .card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .property-card:hover .card-image img { transform: scale(1.05); }
+        
+        .fav-icon {
+            position: absolute; top: 15px; right: 15px; color: white; font-size: 18px; background: rgba(0,0,0,0.4); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+        }
+        .fav-icon:hover { background: var(--primary-black); color: var(--primary-gold); }
+
+        .card-info { padding: 20px; }
+        .card-info h3 { font-size: 16px; font-weight: 700; color: var(--text-dark); margin-bottom: 6px; }
+        .card-info .precinct { color: var(--text-light); font-size: 13px; margin-bottom: 12px; display: flex; align-items: center; gap: 5px; }
+        .card-info .price { color: var(--primary-black); font-weight: 800; font-size: 18px; margin-top: 10px; }
+        .card-features { margin-top: 15px; display: flex; gap: 15px; font-size: 13px; color: var(--text-light); border-top: 1px solid #f0f0f0; padding-top: 12px; }
+        .card-features i { color: var(--primary-gold); }
+
+        /* --- POPULAR LOCATIONS SECTION --- */
+        .popular-section {
+            background-color: #f7f7f7; 
+            padding: 60px 20px;
+            border-top: 1px solid #eee;
+        }
+        .popular-container { max-width: 1280px; margin: 0 auto; }
+
+        .popular-heading {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-black);
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--primary-gold);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .btk-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+
+        .btk-column h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--primary-black);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .btk-column h4 i { color: var(--primary-gold); }
+
+        .location-list { margin-bottom: 20px; }
+        .location-item {
+            display: block;
+            color: #555;
+            font-size: 14px;
+            padding: 8px 0;
+            border-bottom: 1px dotted #ccc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .location-item:hover { color: var(--primary-black); padding-left: 5px; }
+        
+        .acc-tag {
+            background: var(--primary-black); 
+            color: var(--primary-gold); 
+            border: 1px solid var(--primary-gold);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            height: fit-content;
+        }
+
+        /* --- Footer --- */
+        footer { 
+            background: var(--primary-black); 
+            color: #ccc; 
+            padding: 60px 20px 30px; 
+            text-align: center; 
+            border-top: 4px solid var(--primary-gold); 
+        }
+
+        /* --- Mobile Responsive --- */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .btn-login { display: none; }
+            .search-bar { flex-direction: column; border-radius: 20px; gap: 10px; padding: 20px; }
+            .search-part { width: 100%; border-right: none; border-bottom: 1px solid #eee; padding: 10px; }
+            .search-btn { width: 100%; border-radius: 10px; margin-top: 10px; }
+            .btk-grid { grid-template-columns: 1fr; }
+            .logo img { height: 35px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="navbar">
+            <!-- Fixed Image Tag (<img> instead of <image>) -->
+            <a href="#" class="logo">
+                <img src="btk.png" alt="BTK Logo">
+            </a>
+        
+            <!-- Dark Text Links for White Background -->
+            <ul class="nav-links">
+                <li><a href="#">Buy</a></li>
+                <li><a href="#">Rent</a></li>
+                <li><a href="#">Sell</a></li>
+                <li><a href="#">Accounting</a></li>
+            </ul>
+            
+            <!-- Black & Gold Buttons -->
+            <div class="nav-actions">
+                <div class="globe-icon"><i class="fa-solid fa-globe"></i></div>
+                <button class="btn-login">Log in</button>
+                <button class="btn-signup">Sign up</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="hero-banner">
+                <h1>Find your place in BTK</h1>
+                <p>Precincts, Villas, Plots & Accounting Services</p>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-wrapper">
+                <form class="search-bar">
+                    <div class="search-part">
+                        <label>SERVICE TYPE</label>
+                        <select>
+                            <option>Buy Property</option>
+                            <option>Rent Property</option>
+                            <option>Accounting Service</option>
+                        </select>
+                    </div>
+                    <div class="search-part">
+                        <label>PRECINCT</label>
+                        <select>
+                            <option value="">Any Precinct</option>
+                            <option value="33">Precinct 33</option>
+                            <option value="29">Precinct 29</option>
+                            <option value="safari">Safari Villas</option>
+                        </select>
+                    </div>
+                    <div class="search-part">
+                        <label>SIZE / TYPE</label>
+                        <input type="text" placeholder="125 Yds, 10 Marla...">
+                    </div>
+                    <div class="search-part">
+                        <button type="button" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Properties Grid -->
+        <section class="section-container">
+            <h2 class="section-title">Featured in Precincts</h2>
+            <div class="properties-grid">
+                <div class="property-card">
+                    <div class="card-image">
+                        <img src="https://picsum.photos/seed/btkhouse1/400/400" alt="House">
+                        <div class="fav-icon"><i class="fa-regular fa-heart"></i></div>
+                    </div>
+                    <div class="card-info">
+                        <h3>Luxury Home</h3>
+                        <div class="precinct"><i class="fa-solid fa-location-dot"></i> Precinct 33, BTK</div>
+                        <div class="card-features"><span><i class="fa-solid fa-bed"></i> 3 Beds</span><span><i class="fa-solid fa-bath"></i> 3 Baths</span></div>
+                        <div class="price">PKR 1.85 Crore</div>
+                    </div>
+                </div>
+                <div class="property-card">
+                    <div class="card-image">
+                        <img src="https://picsum.photos/seed/btkplot1/400/400" alt="Plot">
+                        <div class="fav-icon"><i class="fa-regular fa-heart"></i></div>
+                    </div>
+                    <div class="card-info">
+                        <h3>Corner Plot</h3>
+                        <div class="precinct"><i class="fa-solid fa-location-dot"></i> Precinct 29, BTK</div>
+                        <div class="card-features"><span><i class="fa-solid fa-ruler-combined"></i> 250 Sq Yds</span><span>Park Facing</span></div>
+                        <div class="price">PKR 2.10 Crore</div>
+                    </div>
+                </div>
+                <div class="property-card">
+                    <div class="card-image">
+                        <img src="https://picsum.photos/seed/btkvilla/400/400" alt="Villa">
+                        <div class="fav-icon"><i class="fa-regular fa-heart"></i></div>
+                    </div>
+                    <div class="card-info">
+                        <h3>Safari Villa</h3>
+                        <div class="precinct"><i class="fa-solid fa-location-dot"></i> Safari Villas, BTK</div>
+                        <div class="card-features"><span><i class="fa-solid fa-bed"></i> 2 Beds</span><span><i class="fa-solid fa-car"></i> Garage</span></div>
+                        <div class="price">PKR 1.10 Crore</div>
+                    </div>
+                </div>
+                <!-- Added more cards for grid -->
+                <div class="property-card">
+                    <div class="card-image">
+                        <img src="https://picsum.photos/seed/btkhouse2/400/400" alt="House">
+                        <div class="fav-icon"><i class="fa-regular fa-heart"></i></div>
+                    </div>
+                    <div class="card-info">
+                        <h3>Modern Bungalow</h3>
+                        <div class="precinct"><i class="fa-solid fa-location-dot"></i> Precinct 1, BTK</div>
+                        <div class="card-features"><span><i class="fa-solid fa-bed"></i> 4 Beds</span><span><i class="fa-solid fa-bath"></i> 4 Baths</span></div>
+                        <div class="price">PKR 2.50 Crore</div>
+                    </div>
+                </div>
+                <div class="property-card">
+                    <div class="card-image">
+                        <img src="https://picsum.photos/seed/btkapartment/400/400" alt="Apartment">
+                        <div class="fav-icon"><i class="fa-regular fa-heart"></i></div>
+                    </div>
+                    <div class="card-info">
+                        <h3>Penthouse</h3>
+                        <div class="precinct"><i class="fa-solid fa-location-dot"></i> Golf City, BTK</div>
+                        <div class="card-features"><span><i class="fa-solid fa-bed"></i> 2 Beds</span><span><i class="fa-solid fa-building"></i> 8th Floor</span></div>
+                        <div class="price">PKR 1.20 Crore</div>
+                    </div>
+                </div>
+                <div class="property-card">
+                    <div class="card-image">
+                        <img src="https://picsum.photos/seed/btkshop/400/400" alt="Shop">
+                        <div class="fav-icon"><i class="fa-regular fa-heart"></i></div>
+                    </div>
+                    <div class="card-info">
+                        <h3>Commercial Shop</h3>
+                        <div class="precinct"><i class="fa-solid fa-location-dot"></i> Precinct 29 Comm, BTK</div>
+                        <div class="card-features"><span><i class="fa-solid fa-store"></i> Retail</span><span><i class="fa-solid fa-road"></i> Main Blvd</span></div>
+                        <div class="price">PKR 85 Lac</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BTK Precincts Section -->
+        <section class="popular-section">
+            <div class="popular-container">
+                <h2 class="popular-heading">Popular Precincts in BTK</h2>
+                <p style="color:#666; margin-bottom: 30px;">Browse properties and accounting services by Precinct.</p>
+
+                <div class="btk-grid">
+                    <div class="btk-column">
+                        <h4><i class="fa-solid fa-map-location-dot"></i> Precincts 1 - 15</h4>
+                        <div class="location-list">
+                            <a href="#" class="location-item">Precinct 1 (Main Area) <span class="acc-tag">Acc. Avail</span></a>
+                            <a href="#" class="location-item">Precinct 2 <span class="acc-tag">Acc. Avail</span></a>
+                            <a href="#" class="location-item">Precinct 4 (Corner Plots) <span class="acc-tag">Acc. Avail</span></a>
+                            <a href="#" class="location-item">Precinct 8 <span class="acc-tag">Acc. Avail</span></a>
+                            <a href="#" class="location-item">Precinct 10 <span class="acc-tag">Acc. Avail</span></a>
+                            <a href="#" class="location-item">Precinct 12 <span class="acc-tag">Acc. Avail</span></a>
+                            <a href="#" class="location-item">Precinct 15 (Near Gate) <span class="acc-tag">Acc. Avail</span></a>
+                        </div>
+                    </div>
+                    <div class="btk-column">
+                        <h4><i class="fa-solid fa-map-location-dot"></i> Precincts 16 - 35</h4>
+                        <div class="location-list">
+                            <a href="#" class="location-item">Precinct 19 <span class="acc-tag">Acc. Avail</span></a>
+                            <a href="#" class="location-item">Precinct 22 <span class="acc-tag">Acc. Avail</span></a>
+                            <a href="#" class="location-item">Precinct 25 <span class="acc-tag">Acc. Avail</span></a>
+                            <a href="#" class="location-item">Precinct 29 (Near Main Blvd) <span class="acc-tag">Acc. Avail</span></a>
+                            <a href="#" class="location-item">Precinct 30 <span class="acc-tag">Acc. Avail</span></a>
+                            <a href="#" class="location-item">Precinct 33 (Popular) <span class="acc-tag">Acc. Avail</span></a>
+                        </div>
+                    </div>
+                    <div class="btk-column">
+                        <h4><i class="fa-solid fa-star"></i> Commercial & Villas</h4>
+                        <div class="location-list">
+                            <a href="#" class="location-item">Safari Villas 1 <span class="acc-tag">Tax File</span></a>
+                            <a href="#" class="location-item">Safari Villas 2 <span class="acc-tag">Tax File</span></a>
+                            <a href="#" class="location-item">Safari Villas 3 <span class="acc-tag">Tax File</span></a>
+                            <a href="#" class="location-item">Golf City <span class="acc-tag">Installments</span></a>
+                            <a href="#" class="location-item">Precinct 29 Commercial <span class="acc-tag">Business</span></a>
+                            <a href="#" class="location-item">Awami Villas <span class="acc-tag">Low Cost</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer (Black Background) -->
+    <footer>
+        <p>&copy; 2023 BAHRIA TOWN KARACHI Properties. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
