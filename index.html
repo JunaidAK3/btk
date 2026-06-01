@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAHRIA TOWN KARACHI | Properties & Accounting</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-black: #0a0a0a;
+            --primary-gold: #C6A87C;
+            --gold-light: #e8d5b7;
+            --text-dark: #1a1a1a;
+            --text-light: #777777;
+            --bg-light: #F8F6F3;
+            --white: #ffffff;
+            --radius: 12px;
+            --shadow: 0 8px 30px rgba(0,0,0,0.10);
+            --shadow-hover: 0 16px 40px rgba(0,0,0,0.16);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { color: var(--text-dark); background: var(--white); font-family: 'DM Sans', sans-serif; }
+        a { text-decoration: none; color: inherit; transition: 0.25s; }
+        ul { list-style: none; }
+
+        /* ===== HEADER ===== */
+        header {
+            background: var(--white);
+            position: fixed;
+            top: 0; width: 100%;
+            z-index: 1000;
+            box-shadow: 0 1px 0 #ebebeb;
+        }
+
+        .navbar {
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 75px;
+            padding: 0 32px;
+            max-width: 1440px;
+        }
+
+        .logo img { height: 42px; width: auto; object-fit: contain; }
+
+        /* Nav */
+        .nav-links {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-item > a {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 14px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-dark);
+            border-radius: 6px;
+            transition: 0.2s;
+        }
+        .nav-item > a:hover { background: #f5f0ea; color: var(--primary-gold); }
+        .nav-item > a i.chevron { font-size: 10px; transition: transform 0.2s; }
+        .nav-item:hover > a i.chevron { transform: rotate(180deg); }
+
+        /* Dropdown */
+        .dropdown {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.14);
+            border: 1px solid #f0ece7;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(8px);
+            transition: all 0.2s ease;
+            z-index: 100;
+            overflow: hidden;
+        }
+
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 11px 18px;
+            font-size: 13.5px;
+            font-weight: 500;
+            color: #444;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .dropdown a:last-child { border-bottom: none; }
+        .dropdown a:hover { background: #faf7f3; color: var(--primary-black); padding-left: 22px; }
+        .dropdown a i { color: var(--primary-gold); width: 16px; }
+
+        .nav-actions { display: flex; align-items: center; gap: 12px; }
+        .btn-login { padding: 8px 18px; border: none; background: none; font-size: 14px; font-weight: 600; color: #555; cursor: pointer; border-radius: 6px; }
+        .btn-login:hover { background: #f5f5f5; }
+        .btn-signup { padding: 9px 22px; border-radius: 7px; font-size: 14px; font-weight: 700; color: var(--primary-gold); background: var(--primary-black); cursor: pointer; border: none; letter-spacing: 0.3px; transition: 0.2s; }
+        .btn-signup:hover { background: #222; }
+
+        /* ===== HERO ===== */
+        .hero { padding-top: 75px; }
+        .hero-banner {
+            background: linear-gradient(135deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.45) 100%), url('https://picsum.photos/seed/btkskyline/1600/600');
+            background-size: cover; background-position: center;
+            height: 380px;
+            display: flex; align-items: center; justify-content: center; flex-direction: column;
+            color: white;
+        }
+        .hero-banner h1 { font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 10px; letter-spacing: -0.5px; }
+        .hero-banner p { font-size: 15px; opacity: 0.85; font-weight: 400; }
+
+        /* Search Bar */
+        .search-wrapper { max-width: 860px; margin: -28px auto 0; position: relative; z-index: 10; padding: 0 20px; }
+        .search-bar {
+            background: var(--white); border-radius: 14px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.14);
+            display: flex; align-items: center;
+            padding: 10px; border: 1px solid #ece8e2;
+        }
+        .search-part { flex: 1; padding: 10px 18px; border-right: 1px solid #eeebe6; }
+        .search-part:last-of-type { border-right: none; flex: 0 0 auto; }
+        .search-part label { display: block; font-size: 10px; font-weight: 800; letter-spacing: 1.2px; color: #aaa; margin-bottom: 3px; text-transform: uppercase; }
+        .search-part select, .search-part input { width: 100%; border: none; outline: none; font-size: 14px; color: #333; background: transparent; cursor: pointer; font-weight: 600; font-family: 'DM Sans', sans-serif; }
+        .search-btn { background: var(--primary-black); color: var(--white); width: 50px; height: 50px; border-radius: 10px; border: none; cursor: pointer; font-size: 16px; transition: 0.2s; }
+        .search-btn:hover { background: var(--primary-gold); color: var(--primary-black); }
+
+        /* ===== PROPERTIES SECTION ===== */
+        .section-container { max-width: 1320px; margin: 0 auto; padding: 70px 24px 60px; }
+        .section-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 32px; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--primary-black); }
+        .section-title span { color: var(--primary-gold); }
+        .view-all { font-size: 13px; font-weight: 600; color: var(--primary-gold); border-bottom: 1px solid var(--primary-gold); padding-bottom: 2px; }
+
+        /* ===== PROPERTY CARDS ===== */
+        .properties-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 26px; }
+
+        .property-card {
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: #fff;
+            border: 1px solid #ede9e3;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .property-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); border-color: var(--primary-gold); }
+
+        /* Card Image */
+        .card-image { position: relative; width: 100%; height: 210px; overflow: hidden; }
+        .card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; display: block; }
+        .property-card:hover .card-image img { transform: scale(1.07); }
+
+        /* Badge on image */
+        .card-badge {
+            position: absolute; top: 14px; left: 14px;
+            background: var(--primary-black); color: var(--primary-gold);
+            font-size: 10px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
+            padding: 4px 10px; border-radius: 5px;
+        }
+        .card-badge.rent { background: #1a6b3a; color: #fff; }
+        .card-badge.installment { background: #1a3d6b; color: #fff; }
+
+        .fav-btn {
+            position: absolute; top: 14px; right: 14px;
+            background: rgba(255,255,255,0.9); border: none; cursor: pointer;
+            width: 34px; height: 34px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 15px; color: #aaa;
+            transition: 0.2s;
+            backdrop-filter: blur(4px);
+        }
+        .fav-btn:hover { background: #fff; color: #e74c3c; transform: scale(1.1); }
+
+        /* Card Body */
+        .card-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            flex: 1;
+        }
+
+        /* Description at top */
+        .card-desc {
+            font-size: 13px;
+            color: var(--text-light);
+            line-height: 1.55;
+            margin-bottom: 14px;
+            border-bottom: 1px solid #f2ede7;
+            padding-bottom: 14px;
+        }
+
+        /* Price — prominent */
+        .card-price {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--primary-black);
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 4px;
+        }
+        .card-price-label {
+            font-size: 11px;
+            color: var(--primary-gold);
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        /* Title & Location */
+        .card-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+        .card-location {
+            display: flex; align-items: center; gap: 5px;
+            font-size: 12.5px; color: #999; margin-bottom: 16px;
+        }
+        .card-location i { color: var(--primary-gold); font-size: 11px; }
+
+        /* Features row */
+        .card-features {
+            display: flex;
+            gap: 0;
+            padding-top: 14px;
+            border-top: 1px solid #f2ede7;
+            margin-top: auto;
+        }
+        .feat-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-size: 11.5px;
+            color: var(--text-light);
+            font-weight: 600;
+            text-align: center;
+            border-right: 1px solid #f2ede7;
+            padding: 6px 0;
+        }
+        .feat-item:last-child { border-right: none; }
+        .feat-item i {
+            font-size: 15px;
+            color: var(--primary-gold);
+            margin-bottom: 2px;
+        }
+        .feat-item span { font-size: 12px; color: #555; font-weight: 700; }
+        .feat-item label { font-size: 10px; color: #aaa; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        /* //////////////////////////////////// */
+
+        /* --- POPULAR LOCATIONS SECTION --- */
+        .popular-section {
+            background-color: #f7f7f7; 
+            padding: 60px 20px;
+            border-top: 1px solid #eee;
+        }
+        .popular-container { max-width: 1280px; margin: 0 auto; }
+
+        .popular-heading {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-black);
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--primary-gold);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .btk-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+
+        .btk-column h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--primary-black);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .btk-column h4 i { color: var(--primary-gold); }
+
+        .location-list { margin-bottom: 20px; }
+        .location-item {
+            display: block;
+            color: #555;
+            font-size: 14px;
+            padding: 8px 0;
+            border-bottom: 1px dotted #ccc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .location-item:hover { color: var(--primary-black); padding-left: 5px; }
+        
+        .acc-tag {
+            background: var(--primary-black); 
+            color: var(--primary-gold); 
+            border: 1px solid var(--primary-gold);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            height: fit-content;
+        }
+
+
+        /* ===== POPULAR PRECINCTS ===== */
+        /* .popular-section { background: var(--bg-light); padding: 70px 24px; border-top: 1px solid #ece8e2; }
+        .popular-container { max-width: 1320px; margin: 0 auto; }
+        .popular-heading { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--primary-black); margin-bottom: 8px; }
+        .popular-heading span { color: var(--primary-gold); }
+        .popular-sub { color: #888; font-size: 14px; margin-bottom: 36px; }
+
+        .btk-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+
+        .btk-column {
+            background: var(--white);
+            border-radius: 12px;
+            border: 1px solid #ede9e3;
+            overflow: hidden;
+        }
+        .btk-col-header {
+            background: var(--primary-black);
+            color: var(--white);
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        .btk-col-header i { color: var(--primary-gold); }
+
+        .location-list { padding: 8px 0; }
+        .location-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            font-size: 13.5px;
+            color: #555;
+            border-bottom: 1px solid #f5f2ee;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+        .location-item:last-child { border-bottom: none; }
+        .location-item:hover { background: #faf7f3; color: var(--primary-black); padding-left: 24px; }
+
+        .acc-tag {
+            background: var(--primary-black);
+            color: var(--primary-gold);
+            border: 1px solid rgba(198,168,124,0.3);
+            padding: 2px 9px;
+            border-radius: 4px;
+            font-size: 9.5px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            text-transform: uppercase;
+        }
+        .acc-tag.green { background: #0f4f2d; color: #7fd4a5; }
+        .acc-tag.blue { background: #0f2f5a; color: #7fb4d4; }
+        .acc-tag.orange { background: #5a2f00; color: #d4944f; } */
+
+        /* ===== WHATSAPP FLOATING BTN ===== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 28px; right: 28px;
+            background: #25D366;
+            color: white;
+            width: 58px; height: 58px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 26px;
+            box-shadow: 0 6px 20px rgba(37,211,102,0.45);
+            z-index: 9999;
+            transition: transform 0.2s, box-shadow 0.2s;
+            animation: pulse-wa 2.5s infinite;
+        }
+        .whatsapp-float:hover { transform: scale(1.12); box-shadow: 0 10px 30px rgba(37,211,102,0.6); }
+
+        @keyframes pulse-wa {
+            0%, 100% { box-shadow: 0 6px 20px rgba(37,211,102,0.45); }
+            50% { box-shadow: 0 6px 30px rgba(37,211,102,0.75), 0 0 0 8px rgba(37,211,102,0.12); }
+        }
+
+    /* ===== FOOTER ===== */
+        footer {
+            background: #0a0a0a;
+            color: #aaa;
+            font-family: 'DM Sans', sans-serif;
+            border-top: 3px solid var(--gold);
+        }
+ 
+        /* TOP STRIP */
+        .footer-top {
+            background: #111;
+            padding: 20px 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+ 
+        .footer-top-text {
+            font-size: 13.5px;
+            color: #888;
+        }
+        .footer-top-text strong { color: var(--gold); font-weight: 600; }
+ 
+        .footer-socials {
+            display: flex;
+            gap: 10px;
+        }
+        .social-btn {
+            width: 36px; height: 36px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            display: flex; align-items: center; justify-content: center;
+            color: #888;
+            font-size: 15px;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+        .social-btn:hover {
+            background: var(--gold-dim);
+            border-color: var(--gold-border);
+            color: var(--gold);
+        }
+ 
+        /* MAIN FOOTER BODY */
+        .footer-body {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 56px 48px 40px;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+        }
+ 
+        /* Brand Column */
+        .footer-brand .logo-wrap {
+            margin-bottom: 20px;
+        }
+        .footer-brand .logo-wrap img {
+            height: 40px;
+            filter: brightness(0) invert(1);
+            opacity: 0.9;
+        }
+        .footer-brand p {
+            font-size: 13.5px;
+            line-height: 1.75;
+            color: #777;
+            margin-bottom: 24px;
+            max-width: 280px;
+        }
+ 
+        /* Contact Pills */
+        .contact-pills { display: flex; flex-direction: column; gap: 10px; }
+        .contact-pill {
+            display: flex; align-items: center; gap: 10px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 8px;
+            padding: 9px 14px;
+            font-size: 13px;
+            color: #999;
+            transition: 0.2s;
+        }
+        .contact-pill:hover { background: var(--gold-dim); border-color: var(--gold-border); color: #fff; }
+        .contact-pill i { color: var(--gold); font-size: 14px; width: 16px; flex-shrink: 0; }
+        .contact-pill span { font-weight: 500; }
+ 
+        /* Nav Columns */
+        .footer-col h4 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(198,168,124,0.2);
+        }
+ 
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        .footer-col ul li a {
+            font-size: 13.5px;
+            color: #777;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            transition: 0.2s;
+        }
+        .footer-col ul li a::before {
+            content: '';
+            width: 4px; height: 4px;
+            background: rgba(198,168,124,0.4);
+            border-radius: 50%;
+            flex-shrink: 0;
+            transition: 0.2s;
+        }
+        .footer-col ul li a:hover { color: var(--gold); padding-left: 4px; }
+        .footer-col ul li a:hover::before { background: var(--gold); }
+ 
+        /* Newsletter */
+        .newsletter-box {
+            background: rgba(198,168,124,0.06);
+            border: 1px solid var(--gold-border);
+            border-radius: 10px;
+            padding: 18px;
+            margin-top: 4px;
+        }
+        .newsletter-box p {
+            font-size: 12.5px;
+            color: #888;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        .newsletter-form {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .newsletter-form input {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 7px;
+            padding: 9px 13px;
+            font-size: 13px;
+            color: #fff;
+            font-family: 'DM Sans', sans-serif;
+            outline: none;
+            transition: 0.2s;
+        }
+        .newsletter-form input::placeholder { color: #555; }
+        .newsletter-form input:focus { border-color: var(--gold-border); background: rgba(198,168,124,0.06); }
+        .newsletter-form button {
+            background: var(--gold);
+            color: #0a0a0a;
+            border: none;
+            border-radius: 7px;
+            padding: 9px 14px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            transition: 0.2s;
+            display: flex; align-items: center; justify-content: center; gap: 6px;
+        }
+        .newsletter-form button:hover { background: #d4b88c; }
+ 
+        /* Precincts Tags */
+        .precinct-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 4px;
+        }
+        .p-tag {
+            font-size: 11.5px;
+            padding: 4px 10px;
+            border-radius: 5px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.07);
+            color: #888;
+            cursor: pointer;
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+        .p-tag:hover { background: var(--gold-dim); border-color: var(--gold-border); color: var(--gold); }
+ 
+        /* FOOTER DIVIDER */
+        .footer-divider {
+            max-width: 1320px;
+            margin: 0 auto;
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+ 
+        /* BOTTOM BAR */
+        .footer-bottom {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 20px 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+ 
+        .footer-copyright {
+            font-size: 12.5px;
+            color: #555;
+        }
+        .footer-copyright span { color: var(--gold); }
+ 
+        .footer-bottom-links {
+            display: flex;
+            gap: 24px;
+        }
+        .footer-bottom-links a {
+            font-size: 12px;
+            color: #555;
+            transition: 0.2s;
+        }
+        .footer-bottom-links a:hover { color: var(--gold); }
+ 
+        .footer-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: #444;
+        }
+        .footer-badge i { color: #25D366; font-size: 14px; }
+ 
+        /* RESPONSIVE */
+        @media (max-width: 960px) {
+            .footer-body { grid-template-columns: 1fr 1fr; gap: 36px; padding: 40px 24px; }
+            .footer-brand { grid-column: 1 / -1; }
+        }
+        @media (max-width: 600px) {
+            .footer-body { grid-template-columns: 1fr; }
+            .footer-top { padding: 16px 24px; }
+            .footer-bottom { flex-direction: column; align-items: flex-start; padding: 20px 24px; }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .nav-links { display: none; }
+            .btn-login { display: none; }
+            .btk-grid { grid-template-columns: 1fr; }
+            .hero-banner h1 { font-size: 2rem; }
+            .search-bar { flex-direction: column; border-radius: 12px; gap: 0; }
+            .search-part { width: 100%; border-right: none; border-bottom: 1px solid #eeebe6; }
+            .search-btn { width: 100%; border-radius: 8px; height: 44px; margin-top: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header>
+        <nav class="navbar">
+            <a href="#" class="logo">
+                <img src="btk.png" alt="BTK Logo">
+            </a>
+
+            <ul class="nav-links">
+                <li class="nav-item"><a href="#">Home</a></li>
+
+                <li class="nav-item">
+                    <a href="#">Rent <i class="fa-solid fa-chevron-down chevron"></i></a>
+                    <div class="dropdown">
+                        <a href="#"><i class="fa-solid fa-building"></i> Apartment</a>
+                        <a href="#"><i class="fa-solid fa-house"></i> Villa</a>
+                        <a href="#"><i class="fa-solid fa-briefcase"></i> Office</a>
+                        <a href="#"><i class="fa-solid fa-store"></i> Shop</a>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#">Sale <i class="fa-solid fa-chevron-down chevron"></i></a>
+                    <div class="dropdown">
+                        <a href="#"><i class="fa-solid fa-building"></i> Apartment</a>
+                        <a href="#"><i class="fa-solid fa-house"></i> Villa</a>
+                        <a href="#"><i class="fa-solid fa-briefcase"></i> Office</a>
+                        <a href="#"><i class="fa-solid fa-store"></i> Shop</a>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#">Installments <i class="fa-solid fa-chevron-down chevron"></i></a>
+                    <div class="dropdown">
+                        <a href="#"><i class="fa-solid fa-building"></i> Apartment</a>
+                        <a href="#"><i class="fa-solid fa-house"></i> Villa</a>
+                        <a href="#"><i class="fa-solid fa-briefcase"></i> Office</a>
+                        <a href="#"><i class="fa-solid fa-store"></i> Shop</a>
+                    </div>
+                </li>
+
+                <li class="nav-item"><a href="#">Guest House</a></li>
+                <li class="nav-item"><a href="#">Blog</a></li>
+
+                <li class="nav-item">
+                    <a href="#">Contact Us <i class="fa-solid fa-chevron-down chevron"></i></a>
+                    <div class="dropdown">
+                        <a href="#"><i class="fa-solid fa-circle-plus"></i> Publish Property</a>
+                        <a href="#"><i class="fa-solid fa-magnifying-glass"></i> Request Property</a>
+                    </div>
+                </li>
+
+                <li class="nav-item"><a href="#">About</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="btn-login">Log in</button>
+                <button class="btn-signup">Sign up</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ===== MAIN ===== -->
+    <main>
+
+        <!-- Hero -->
+        <div class="hero">
+            <div class="hero-banner">
+                <h1>Find your place in BTK</h1>
+                <p>Precincts, Villas, Plots & Accounting Services</p>
+            </div>
+
+            <div class="search-wrapper">
+                <div class="search-bar">
+                    <div class="search-part">
+                        <label>Service Type</label>
+                        <select>
+                            <option>Buy Property</option>
+                            <option>Rent Property</option>
+                            <option>Installment Plan</option>
+                            <option>Guest House</option>
+                        </select>
+                    </div>
+                    <div class="search-part">
+                        <label>Precinct</label>
+                        <select>
+                            <option value="">Any Precinct</option>
+                            <option>Precinct 33</option>
+                            <option>Precinct 29</option>
+                            <option>Safari Villas</option>
+                            <option>Golf City</option>
+                        </select>
+                    </div>
+                    <div class="search-part">
+                        <label>Property Type</label>
+                        <select>
+                            <option value="">Any Type</option>
+                            <option>Apartment</option>
+                            <option>Villa</option>
+                            <option>Office</option>
+                            <option>Shop</option>
+                            <option>Plot</option>
+                        </select>
+                    </div>
+                    <div class="search-part">
+                        <label>SIZE / TYPE</label>
+                        <input type="text" placeholder="125 Yds, 10 Marla...">
+                    </div>
+                    <div class="search-part">
+                        <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== PROPERTY CARDS ===== -->
+        <section class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Featured <span>Properties</span></h2>
+                <a href="#" class="view-all">View all listings →</a>
+            </div>
+
+            <div class="properties-grid">
+
+                <!-- Card 1 -->
+                <div class="property-card">
+                    <div class="card-image">
+                        <img src="https://picsum.photos/seed/btkhouse1/600/400" alt="Luxury Home">
+                        <span class="card-badge">For Sale</span>
+                        <button class="fav-btn"><i class="fa-regular fa-heart"></i></button>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-desc">Fully furnished luxury home with modern interiors, open kitchen, and landscaped backyard. Located in the prime zone of Precinct 33.</p>
+                        <div class="card-price">PKR 1.85 Cr</div>
+                        <div class="card-price-label">Sale Price</div>
+                        <div class="card-title">Luxury Home – Precinct 33</div>
+                        <div class="card-location"><i class="fa-solid fa-location-dot"></i> Precinct 33, Bahria Town Karachi</div>
+                        <div class="card-features">
+                            <div class="feat-item">
+                                <i class="fa-solid fa-bed"></i>
+                                <span>3</span>
+                                <label>Beds</label>
+                            </div>
+                            <div class="feat-item">
+                                <i class="fa-solid fa-shower"></i>
+                                <span>3</span>
+                                <label>Baths</label>
+                            </div>
+                            <div class="feat-item">
+                                <i class="fa-solid fa-vector-square"></i>
+                                <span>200</span>
+                                <label>Sq Yds</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="property-card">
+                    <div class="card-image">
+                        <img src="https://picsum.photos/seed/btkplot1/600/400" alt="Corner Plot">
+                        <span class="card-badge">For Sale</span>
+                        <button class="fav-btn"><i class="fa-regular fa-heart"></i></button>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-desc">Park-facing corner plot in Precinct 29. Clear title, ideal for a custom build. Adjacent to main boulevard with easy access.</p>
+                        <div class="card-price">PKR 2.10 Cr</div>
+                        <div class="card-price-label">Sale Price</div>
+                        <div class="card-title">Corner Plot – Precinct 29</div>
+                        <div class="card-location"><i class="fa-solid fa-location-dot"></i> Precinct 29, Bahria Town Karachi</div>
+                        <div class="card-features">
+                            <div class="feat-item">
+                                <i class="fa-solid fa-tree"></i>
+                                <span>Park</span>
+                                <label>Facing</label>
+                            </div>
+                            <div class="feat-item">
+                                <i class="fa-solid fa-turn-up"></i>
+                                <span>Corner</span>
+                                <label>Plot</label>
+                            </div>
+                            <div class="feat-item">
+                                <i class="fa-solid fa-vector-square"></i>
+                                <span>250</span>
+                                <label>Sq Yds</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="property-card">
+                    <div class="card-image">
+                        <img src="https://picsum.photos/seed/btkvilla/600/400" alt="Safari Villa">
+                        <span class="card-badge rent">For Rent</span>
+                        <button class="fav-btn"><i class="fa-regular fa-heart"></i></button>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-desc">Cozy Safari Villa with attached garage and community park nearby. Perfect for a small family looking for a peaceful lifestyle in BTK.</p>
+                        <div class="card-price">PKR 55,000 /mo</div>
+                        <div class="card-price-label">Monthly Rent</div>
+                        <div class="card-title">Safari Villa – Type A</div>
+                        <div class="card-location"><i class="fa-solid fa-location-dot"></i> Safari Villas, Bahria Town Karachi</div>
+                        <div class="card-features">
+                            <div class="feat-item">
+                                <i class="fa-solid fa-bed"></i>
+                                <span>2</span>
+                                <label>Beds</label>
+                            </div>
+                            <div class="feat-item">
+                                <i class="fa-solid fa-shower"></i>
+                                <span>2</span>
+                                <label>Baths</label>
+                            </div>
+                            <div class="feat-item">
+                                <i class="fa-solid fa-car"></i>
+                                <span>1</span>
+                                <label>Garage</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="property-card">
+                    <div class="card-image">
+                        <img src="https://picsum.photos/seed/btkhouse2/600/400" alt="Modern Bungalow">
+                        <span class="card-badge installment">Installments</span>
+                        <button class="fav-btn"><i class="fa-regular fa-heart"></i></button>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-desc">Spacious 500 Sq Yd modern bungalow on easy 4-year installment plan. Features a rooftop terrace, home theatre room, and servants quarters.</p>
+                        <div class="card-price">PKR 2.50 Cr</div>
+                        <div class="card-price-label">Total — 4yr Plan Available</div>
+                        <div class="card-title">Modern Bungalow – Precinct 1</div>
+                        <div class="card-location"><i class="fa-solid fa-location-dot"></i> Precinct 1, Bahria Town Karachi</div>
+                        <div class="card-features">
+                            <div class="feat-item">
+                                <i class="fa-solid fa-bed"></i>
+                                <span>4</span>
+                                <label>Beds</label>
+                            </div>
+                            <div class="feat-item">
+                                <i class="fa-solid fa-shower"></i>
+                                <span>4</span>
+                                <label>Baths</label>
+                            </div>
+                            <div class="feat-item">
+                                <i class="fa-solid fa-vector-square"></i>
+                                <span>500</span>
+                                <label>Sq Yds</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="property-card">
+                    <div class="card-image">
+                        <img src="https://picsum.photos/seed/btkapartment/600/400" alt="Penthouse">
+                        <span class="card-badge">For Sale</span>
+                        <button class="fav-btn"><i class="fa-regular fa-heart"></i></button>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-desc">High-floor penthouse in Golf City Apartments with panoramic views, designer finishes, and access to the Golf Club. Ready possession.</p>
+                        <div class="card-price">PKR 1.20 Cr</div>
+                        <div class="card-price-label">Sale Price</div>
+                        <div class="card-title">Penthouse – Golf City</div>
+                        <div class="card-location"><i class="fa-solid fa-location-dot"></i> Golf City, Bahria Town Karachi</div>
+                        <div class="card-features">
+                            <div class="feat-item">
+                                <i class="fa-solid fa-bed"></i>
+                                <span>2</span>
+                                <label>Beds</label>
+                            </div>
+                            <div class="feat-item">
+                                <i class="fa-solid fa-shower"></i>
+                                <span>2</span>
+                                <label>Baths</label>
+                            </div>
+                            <div class="feat-item">
+                                <i class="fa-solid fa-building"></i>
+                                <span>8th</span>
+                                <label>Floor</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="property-card">
+                    <div class="card-image">
+                        <img src="https://picsum.photos/seed/btkshop/600/400" alt="Commercial Shop">
+                        <span class="card-badge">For Sale</span>
+                        <button class="fav-btn"><i class="fa-regular fa-heart"></i></button>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-desc">Ground-floor commercial shop on Main Boulevard, Precinct 29. High foot traffic zone — ideal for retail, food, or service businesses.</p>
+                        <div class="card-price">PKR 85 Lac</div>
+                        <div class="card-price-label">Sale Price</div>
+                        <div class="card-title">Commercial Shop – P-29</div>
+                        <div class="card-location"><i class="fa-solid fa-location-dot"></i> Precinct 29 Commercial, BTK</div>
+                        <div class="card-features">
+                            <div class="feat-item">
+                                <i class="fa-solid fa-store"></i>
+                                <span>Retail</span>
+                                <label>Type</label>
+                            </div>
+                            <div class="feat-item">
+                                <i class="fa-solid fa-road"></i>
+                                <span>Main</span>
+                                <label>Blvd</label>
+                            </div>
+                            <div class="feat-item">
+                                <i class="fa-solid fa-vector-square"></i>
+                                <span>180</span>
+                                <label>Sq Ft</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+                <!-- BTK Precincts Section -->
+        <section class="popular-section">
+            <div class="popular-container">
+                <h2 class="popular-heading">Popular Precincts in BTK</h2>
+                <p style="color:#666; margin-bottom: 30px;">Browse properties and accounting services by Precinct.</p>
+
+                <div class="btk-grid">
+                    <div class="btk-column">
+                        <h4><i class="fa-solid fa-map-location-dot"></i> Precincts 1 - 15</h4>
+                        <div class="location-list">
+                            <a href="#" class="location-item">Precinct 1 (Main Area) <span class="acc-tag">Acc. Avail</span></a>
+                            <a href="#" class="location-item">Precinct 2 <span class="acc-tag">Acc. Avail</span></a>
+                            <a href="#" class="location-item">Precinct 4 (Corner Plots) <span class="acc-tag">Acc. Avail</span></a>
+                            <a href="#" class="location-item">Precinct 8 <span class="acc-tag">Acc. Avail</span></a>
+                            <a href="#" class="location-item">Precinct 10 <span class="acc-tag">Acc. Avail</span></a>
+                            <a href="#" class="location-item">Precinct 12 <span class="acc-tag">Acc. Avail</span></a>
+                            <a href="#" class="location-item">Precinct 15 (Near Gate) <span class="acc-tag">Acc. Avail</span></a>
+                        </div>
+                    </div>
+                    <div class="btk-column">
+                        <h4><i class="fa-solid fa-map-location-dot"></i> Precincts 16 - 35</h4>
+                        <div class="location-list">
+                            <a href="#" class="location-item">Precinct 19 <span class="acc-tag">Acc. Avail</span></a>
+                            <a href="#" class="location-item">Precinct 22 <span class="acc-tag">Acc. Avail</span></a>
+                            <a href="#" class="location-item">Precinct 25 <span class="acc-tag">Acc. Avail</span></a>
+                            <a href="#" class="location-item">Precinct 29 (Near Main Blvd) <span class="acc-tag">Acc. Avail</span></a>
+                            <a href="#" class="location-item">Precinct 30 <span class="acc-tag">Acc. Avail</span></a>
+                            <a href="#" class="location-item">Precinct 33 (Popular) <span class="acc-tag">Acc. Avail</span></a>
+                        </div>
+                    </div>
+                    <div class="btk-column">
+                        <h4><i class="fa-solid fa-star"></i> Commercial & Villas</h4>
+                        <div class="location-list">
+                            <a href="#" class="location-item">Safari Villas 1 <span class="acc-tag">Tax File</span></a>
+                            <a href="#" class="location-item">Safari Villas 2 <span class="acc-tag">Tax File</span></a>
+                            <a href="#" class="location-item">Safari Villas 3 <span class="acc-tag">Tax File</span></a>
+                            <a href="#" class="location-item">Golf City <span class="acc-tag">Installments</span></a>
+                            <a href="#" class="location-item">Precinct 29 Commercial <span class="acc-tag">Business</span></a>
+                            <a href="#" class="location-item">Awami Villas <span class="acc-tag">Low Cost</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+   <footer>
+ 
+    <!-- Top Strip: Tagline + Socials -->
+    <div class="footer-top">
+        <div class="footer-top-text">
+            Pakistan's Most Trusted <strong>Bahria Town Karachi</strong> Property & Accounting Portal
+        </div>
+        <div class="footer-socials">
+            <a href="#" class="social-btn" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="social-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="social-btn" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" class="social-btn" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="#" class="social-btn" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+    </div>
+ 
+    <!-- Main Body -->
+    <div class="footer-body">
+ 
+        <!-- Brand Column -->
+        <div class="footer-brand">
+            <div class="logo-wrap">
+                <img src="btk.png" alt="BTK Logo">
+            </div>
+            <p>Your complete guide to buying, renting, and investing in Bahria Town Karachi. We also provide professional accounting, tax filing, and installment management services.</p>
+ 
+            <div class="contact-pills">
+                <a href="tel:+923001234567" class="contact-pill">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>+92 300 1234567</span>
+                </a>
+                <a href="mailto:info@btkproperties.pk" class="contact-pill">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>info@btkproperties.pk</span>
+                </a>
+                <a href="#" class="contact-pill">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>Main Office, Bahria Town Karachi</span>
+                </a>
+            </div>
+        </div>
+ 
+        <!-- Quick Links -->
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Buy Property</a></li>
+                <li><a href="#">Rent Property</a></li>
+                <li><a href="#">Installments</a></li>
+                <li><a href="#">Guest House</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </div>
+ 
+        <!-- Property Types -->
+        <div class="footer-col">
+            <h4>Property Types</h4>
+            <ul>
+                <li><a href="#">Apartments</a></li>
+                <li><a href="#">Villas</a></li>
+                <li><a href="#">Offices</a></li>
+                <li><a href="#">Shops</a></li>
+                <li><a href="#">Plots</a></li>
+                <li><a href="#">Bungalows</a></li>
+                <li><a href="#">Penthouses</a></li>
+            </ul>
+ 
+            <!-- Popular Precincts -->
+            <h4 style="margin-top: 24px;">Popular Precincts</h4>
+            <div class="precinct-tags">
+                <span class="p-tag">P-1</span>
+                <span class="p-tag">P-4</span>
+                <span class="p-tag">P-8</span>
+                <span class="p-tag">P-10</span>
+                <span class="p-tag">P-19</span>
+                <span class="p-tag">P-25</span>
+                <span class="p-tag">P-29</span>
+                <span class="p-tag">P-33</span>
+                <span class="p-tag">Safari</span>
+                <span class="p-tag">Golf City</span>
+            </div>
+        </div>
+ 
+        <!-- Newsletter -->
+        <div class="footer-col">
+            <h4>Stay Updated</h4>
+            <div class="newsletter-box">
+                <p>Get the latest BTK property listings and accounting tips straight to your inbox.</p>
+                <div class="newsletter-form">
+                    <input type="text" placeholder="Your name">
+                    <input type="email" placeholder="Email address">
+                    <button type="button">
+                        <i class="fa-solid fa-paper-plane"></i> Subscribe
+                    </button>
+                </div>
+            </div>
+ 
+            <!-- Services List -->
+            <h4 style="margin-top: 24px;">Accounting Services</h4>
+            <ul>
+                <li><a href="#">Tax Filing (FBR)</a></li>
+                <li><a href="#">Installment Tracking</a></li>
+                <li><a href="#">Property Ledger</a></li>
+                <li><a href="#">Business Registration</a></li>
+            </ul>
+        </div>
+ 
+    </div>
+ 
+    <hr class="footer-divider">
+ 
+    <!-- Bottom Bar -->
+    <div class="footer-bottom">
+        <div class="footer-copyright">
+            &copy; 2025 <span>Bahria Town Karachi Properties</span>. All Rights Reserved.
+        </div>
+        <div class="footer-bottom-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Use</a>
+            <a href="#">Disclaimer</a>
+            <a href="#">Sitemap</a>
+        </div>
+        <div class="footer-badge">
+            <i class="fa-brands fa-whatsapp"></i> WhatsApp Support Available
+        </div>
+    </div>
+ 
+</footer>
+
+    <!-- ===== WHATSAPP FLOATING BUTTON ===== -->
+    <a href="https://wa.me/923001234567" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+</body>
+</html>
