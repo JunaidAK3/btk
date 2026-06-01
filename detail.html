@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Home – Precinct 33 | Bahria Town Karachi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-black: #0a0a0a;
+            --primary-gold: #C6A87C;
+            --gold-light: #e8d5b7;
+            --text-dark: #1a1a1a;
+            --text-light: #777777;
+            --bg-light: #F8F6F3;
+            --white: #ffffff;
+            --radius: 12px;
+            --shadow: 0 8px 30px rgba(0,0,0,0.10);
+            --shadow-hover: 0 16px 40px rgba(0,0,0,0.16);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { color: var(--text-dark); background: var(--white); font-family: 'DM Sans', sans-serif; }
+        a { text-decoration: none; color: inherit; transition: 0.25s; }
+        ul { list-style: none; }
+
+        /* ===== HEADER ===== */
+        header {
+            background: var(--white);
+            position: fixed;
+            top: 0; width: 100%;
+            z-index: 1000;
+            box-shadow: 0 1px 0 #ebebeb;
+        }
+        .navbar {
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 75px;
+            padding: 0 32px;
+            max-width: 1440px;
+        }
+        .logo img { height: 42px; width: auto; object-fit: contain; }
+        .nav-links { display: flex; gap: 4px; align-items: center; }
+        .nav-item { position: relative; }
+        .nav-item > a {
+            display: flex; align-items: center; gap: 5px;
+            padding: 8px 14px; font-size: 14px; font-weight: 600;
+            color: var(--text-dark); border-radius: 6px; transition: 0.2s;
+        }
+        .nav-item > a:hover { background: #f5f0ea; color: var(--primary-gold); }
+        .nav-item > a i.chevron { font-size: 10px; transition: transform 0.2s; }
+        .nav-item:hover > a i.chevron { transform: rotate(180deg); }
+        .dropdown {
+            position: absolute; top: calc(100% + 10px); left: 0;
+            background: var(--white); border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.14);
+            border: 1px solid #f0ece7; min-width: 200px;
+            opacity: 0; visibility: hidden; transform: translateY(8px);
+            transition: all 0.2s ease; z-index: 100; overflow: hidden;
+        }
+        .nav-item:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown a {
+            display: flex; align-items: center; gap: 10px;
+            padding: 11px 18px; font-size: 13.5px; font-weight: 500;
+            color: #444; border-bottom: 1px solid #f5f5f5;
+        }
+        .dropdown a:last-child { border-bottom: none; }
+        .dropdown a:hover { background: #faf7f3; color: var(--primary-black); padding-left: 22px; }
+        .dropdown a i { color: var(--primary-gold); width: 16px; }
+        .nav-actions { display: flex; align-items: center; gap: 12px; }
+        .btn-login { padding: 8px 18px; border: none; background: none; font-size: 14px; font-weight: 600; color: #555; cursor: pointer; border-radius: 6px; }
+        .btn-login:hover { background: #f5f5f5; }
+        .btn-signup { padding: 9px 22px; border-radius: 7px; font-size: 14px; font-weight: 700; color: var(--primary-gold); background: var(--primary-black); cursor: pointer; border: none; letter-spacing: 0.3px; transition: 0.2s; }
+        .btn-signup:hover { background: #222; }
+
+        /* ===== BREADCRUMB ===== */
+        .breadcrumb-bar {
+            margin-top: 75px;
+            background: var(--bg-light);
+            border-bottom: 1px solid #ece8e2;
+            padding: 12px 32px;
+        }
+        .breadcrumb-inner {
+            max-width: 1320px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--text-light);
+        }
+        .breadcrumb-inner a { color: var(--text-light); }
+        .breadcrumb-inner a:hover { color: var(--primary-gold); }
+        .breadcrumb-inner i { font-size: 10px; }
+        .breadcrumb-inner span { color: var(--text-dark); font-weight: 600; }
+
+        /* ===== PAGE LAYOUT ===== */
+        .page-wrapper {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 36px 32px 60px;
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 56px;
+            align-items: start;
+        }
+
+        /* ===== LEFT COLUMN ===== */
+
+        /* Badge + Title */
+        .listing-type-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--primary-black);
+            color: var(--primary-gold);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            padding: 5px 12px;
+            border-radius: 5px;
+            margin-bottom: 14px;
+        }
+        .listing-type-badge.rent { background: #1a6b3a; color: #fff; }
+        .listing-type-badge.installment { background: #1a3d6b; color: #fff; }
+
+        .property-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1.25;
+            color: var(--primary-black);
+            margin-bottom: 10px;
+        }
+        .property-location {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 22px;
+        }
+        .property-location i { color: var(--primary-gold); }
+
+        /* Quick stats strip */
+        .stats-strip {
+            display: flex;
+            gap: 0;
+            border: 1px solid #ece8e2;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 28px;
+        }
+        .stat-item {
+            flex: 1;
+            padding: 14px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            border-right: 1px solid #ece8e2;
+            text-align: center;
+        }
+        .stat-item:last-child { border-right: none; }
+        .stat-item i { color: var(--primary-gold); font-size: 16px; }
+        .stat-val { font-size: 13px; font-weight: 700; color: var(--text-dark); }
+        .stat-label { font-size: 10px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* Gallery */
+        .gallery-wrap {
+            border-radius: 14px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1.6fr 1fr;
+            grid-template-rows: 240px 180px;
+            gap: 6px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        .gallery-wrap img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+            cursor: pointer;
+        }
+        .gallery-wrap img:hover { transform: scale(1.04); }
+        .gallery-wrap .main-img { grid-row: 1 / -1; }
+        .gallery-photos-btn {
+            position: absolute;
+            bottom: 14px; right: 14px;
+            background: rgba(255,255,255,0.92);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 7px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            backdrop-filter: blur(4px);
+            transition: 0.2s;
+        }
+        .gallery-photos-btn:hover { background: #fff; }
+
+        /* Section blocks */
+        .section-block {
+            padding: 32px 0;
+            border-bottom: 1px solid #ece8e2;
+        }
+        .section-block:last-child { border-bottom: none; }
+        .section-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--primary-black);
+            margin-bottom: 18px;
+        }
+
+        /* Description */
+        .description-text {
+            font-size: 15px;
+            line-height: 1.75;
+            color: #444;
+        }
+        .show-more-btn {
+            background: none;
+            border: none;
+            color: var(--primary-black);
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            text-decoration: underline;
+        }
+
+        /* Property Details Grid */
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        .detail-card {
+            background: var(--bg-light);
+            border-radius: 10px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .detail-card i {
+            color: var(--primary-gold);
+            font-size: 18px;
+        }
+        .detail-card .d-label {
+            font-size: 11px;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+            font-weight: 600;
+        }
+        .detail-card .d-val {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        /* Map Section */
+        .map-label {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .map-label i { color: var(--primary-gold); }
+        .map-container {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #ece8e2;
+            height: 320px;
+        }
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+        .map-disclaimer {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Features / Amenities */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            color: var(--text-dark);
+            padding: 10px 14px;
+            background: var(--bg-light);
+            border-radius: 8px;
+        }
+        .feature-item i { color: var(--primary-gold); width: 18px; text-align: center; }
+
+        /* ===== RIGHT COLUMN — SIDEBAR ===== */
+        .sticky-sidebar { position: sticky; top: 95px; }
+
+        /* Price card */
+        .price-card {
+            background: var(--white);
+            border: 1px solid #ece8e2;
+            border-radius: 14px;
+            padding: 26px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+        }
+        .price-main {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-black);
+            margin-bottom: 4px;
+        }
+        .price-sub {
+            font-size: 11px;
+            color: var(--primary-gold);
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+        .price-divider {
+            border: none;
+            border-top: 1px solid #ece8e2;
+            margin: 18px 0;
+        }
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: var(--text-light);
+            margin-bottom: 8px;
+        }
+        .price-row.total {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #ece8e2;
+        }
+
+        /* Installment table */
+        .installment-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+        .installment-table th {
+            background: var(--primary-black);
+            color: var(--primary-gold);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            padding: 8px 10px;
+            text-align: left;
+        }
+        .installment-table td {
+            padding: 9px 10px;
+            border-bottom: 1px solid #f2ede7;
+            color: var(--text-dark);
+        }
+        .installment-table tr:last-child td { border-bottom: none; }
+        .installment-table tr:nth-child(even) td { background: var(--bg-light); }
+
+        /* Contact card */
+        .contact-card {
+            background: var(--white);
+            border: 1px solid #ece8e2;
+            border-radius: 14px;
+            padding: 26px;
+            box-shadow: var(--shadow);
+        }
+        .contact-card-title {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-light);
+            margin-bottom: 18px;
+        }
+
+        /* Poster profile */
+        .poster-profile {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px;
+            background: var(--bg-light);
+            border-radius: 10px;
+            margin-bottom: 18px;
+        }
+        .poster-avatar {
+            width: 52px; height: 52px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-gold);
+        }
+        .poster-avatar-placeholder {
+            width: 52px; height: 52px;
+            border-radius: 50%;
+            background: var(--primary-black);
+            color: var(--primary-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+            flex-shrink: 0;
+            font-family: 'Playfair Display', serif;
+        }
+        .poster-name { font-size: 15px; font-weight: 700; color: var(--text-dark); }
+        .poster-type {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            color: var(--primary-gold);
+        }
+        .poster-meta { font-size: 12px; color: var(--text-light); margin-top: 2px; }
+
+        /* Contact buttons */
+        .contact-btns { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+        .btn-call {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            background: var(--primary-black);
+            color: var(--primary-gold);
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            width: 100%;
+        }
+        .btn-call:hover { background: #222; }
+        .btn-whatsapp {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            background: #25D366;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            width: 100%;
+        }
+        .btn-whatsapp:hover { background: #1da855; }
+        .btn-email {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            background: var(--white);
+            color: var(--text-dark);
+            border: 1.5px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            width: 100%;
+        }
+        .btn-email:hover { border-color: var(--primary-gold); color: var(--primary-gold); }
+
+        /* Message form */
+        .msg-divider {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 12px;
+            color: var(--text-light);
+            margin: 14px 0;
+        }
+        .msg-divider::before, .msg-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #ece8e2;
+        }
+        .msg-form { display: flex; flex-direction: column; gap: 10px; }
+        .msg-form input, .msg-form textarea, .msg-form select {
+            width: 100%;
+            padding: 11px 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text-dark);
+            outline: none;
+            background: var(--bg-light);
+            transition: 0.2s;
+        }
+        .msg-form input:focus, .msg-form textarea:focus, .msg-form select:focus {
+            border-color: var(--primary-gold);
+            background: #fff;
+        }
+        .msg-form textarea { resize: vertical; min-height: 90px; }
+        .btn-send {
+            background: var(--primary-gold);
+            color: var(--primary-black);
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+        }
+        .btn-send:hover { background: #d4b88c; }
+
+        /* ===== SIMILAR PROPERTIES ===== */
+        .similar-section {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 0 32px 70px;
+        }
+        .similar-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary-black);
+            margin-bottom: 28px;
+        }
+        .similar-heading span { color: var(--primary-gold); }
+        .similar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        .similar-card {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #ede9e3;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            background: #fff;
+        }
+        .similar-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); border-color: var(--primary-gold); }
+        .similar-img-wrap { position: relative; height: 190px; overflow: hidden; }
+        .similar-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .similar-card:hover .similar-img-wrap img { transform: scale(1.07); }
+        .sim-badge {
+            position: absolute; top: 12px; left: 12px;
+            background: var(--primary-black); color: var(--primary-gold);
+            font-size: 9px; font-weight: 800; letter-spacing: 1px;
+            text-transform: uppercase; padding: 4px 9px; border-radius: 4px;
+        }
+        .sim-badge.rent { background: #1a6b3a; color: #fff; }
+        .similar-card-body { padding: 16px; }
+        .similar-card-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+        .similar-card-loc { font-size: 12px; color: var(--text-light); margin-bottom: 12px; display: flex; align-items: center; gap: 4px; }
+        .similar-card-loc i { color: var(--primary-gold); font-size: 10px; }
+        .similar-card-price { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; color: var(--primary-black); }
+        .similar-card-price span { font-size: 11px; font-family: 'DM Sans', sans-serif; color: var(--text-light); font-weight: 500; margin-left: 3px; }
+
+        /* ===== FOOTER ===== */
+        footer { background: #0a0a0a; color: #aaa; font-family: 'DM Sans', sans-serif; }
+        .footer-top {
+            background: #111; padding: 20px 48px;
+            display: flex; align-items: center; justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,0.05); flex-wrap: wrap; gap: 16px;
+        }
+        .footer-top-text { font-size: 13.5px; color: #888; }
+        .footer-top-text strong { color: var(--primary-gold); font-weight: 600; }
+        .footer-socials { display: flex; gap: 10px; }
+        .social-btn {
+            width: 36px; height: 36px; border-radius: 8px;
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+            display: flex; align-items: center; justify-content: center;
+            color: #888; font-size: 15px; transition: 0.2s; cursor: pointer;
+        }
+        .social-btn:hover { background: rgba(198,168,124,0.15); border-color: rgba(198,168,124,0.4); color: var(--primary-gold); }
+        .footer-body {
+            max-width: 1320px; margin: 0 auto; padding: 56px 48px 40px;
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+        }
+        .footer-brand .logo-wrap { margin-bottom: 20px; }
+        .footer-brand .logo-wrap img { height: 40px; filter: brightness(0) invert(1); opacity: 0.9; }
+        .footer-brand p { font-size: 13.5px; line-height: 1.75; color: #777; margin-bottom: 24px; max-width: 280px; }
+        .contact-pills { display: flex; flex-direction: column; gap: 10px; }
+        .contact-pill {
+            display: flex; align-items: center; gap: 10px;
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 8px; padding: 9px 14px; font-size: 13px; color: #999; transition: 0.2s;
+        }
+        .contact-pill:hover { background: rgba(198,168,124,0.1); border-color: rgba(198,168,124,0.3); color: #fff; }
+        .contact-pill i { color: var(--primary-gold); font-size: 14px; width: 16px; flex-shrink: 0; }
+        .footer-col h4 {
+            font-size: 11px; font-weight: 700; letter-spacing: 1.4px;
+            text-transform: uppercase; color: var(--primary-gold);
+            margin-bottom: 20px; padding-bottom: 10px;
+            border-bottom: 1px solid rgba(198,168,124,0.2);
+        }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a {
+            font-size: 13.5px; color: #777; display: flex;
+            align-items: center; gap: 7px; transition: 0.2s;
+        }
+        .footer-col ul li a::before {
+            content: ''; width: 4px; height: 4px;
+            background: rgba(198,168,124,0.4); border-radius: 50%;
+            flex-shrink: 0; transition: 0.2s;
+        }
+        .footer-col ul li a:hover { color: var(--primary-gold); padding-left: 4px; }
+        .footer-col ul li a:hover::before { background: var(--primary-gold); }
+        .newsletter-box {
+            background: rgba(198,168,124,0.06); border: 1px solid rgba(198,168,124,0.25);
+            border-radius: 10px; padding: 18px; margin-top: 4px;
+        }
+        .newsletter-box p { font-size: 12.5px; color: #888; margin-bottom: 12px; line-height: 1.5; }
+        .newsletter-form { display: flex; flex-direction: column; gap: 8px; }
+        .newsletter-form input {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 7px; padding: 9px 13px; font-size: 13px; color: #fff;
+            font-family: 'DM Sans', sans-serif; outline: none; transition: 0.2s;
+        }
+        .newsletter-form input::placeholder { color: #555; }
+        .newsletter-form input:focus { border-color: rgba(198,168,124,0.4); }
+        .newsletter-form button {
+            background: var(--primary-gold); color: #0a0a0a; border: none;
+            border-radius: 7px; padding: 9px 14px; font-size: 13px; font-weight: 700;
+            cursor: pointer; font-family: 'DM Sans', sans-serif; transition: 0.2s;
+            display: flex; align-items: center; justify-content: center; gap: 6px;
+        }
+        .newsletter-form button:hover { background: #d4b88c; }
+        .precinct-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+        .p-tag {
+            font-size: 11.5px; padding: 4px 10px; border-radius: 5px;
+            background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+            color: #888; cursor: pointer; transition: 0.2s; white-space: nowrap;
+        }
+        .p-tag:hover { background: rgba(198,168,124,0.15); border-color: rgba(198,168,124,0.4); color: var(--primary-gold); }
+        .footer-divider { max-width: 1320px; margin: 0 auto; border: none; border-top: 1px solid rgba(255,255,255,0.05); }
+        .footer-bottom {
+            max-width: 1320px; margin: 0 auto; padding: 20px 48px;
+            display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+        }
+        .footer-copyright { font-size: 12.5px; color: #555; }
+        .footer-copyright span { color: var(--primary-gold); }
+        .footer-bottom-links { display: flex; gap: 24px; }
+        .footer-bottom-links a { font-size: 12px; color: #555; transition: 0.2s; }
+        .footer-bottom-links a:hover { color: var(--primary-gold); }
+        .footer-badge { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #444; }
+        .footer-badge i { color: #25D366; font-size: 14px; }
+
+        /* WhatsApp float */
+        .whatsapp-float {
+            position: fixed; bottom: 28px; right: 28px;
+            background: #25D366; color: white;
+            width: 58px; height: 58px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 26px; box-shadow: 0 6px 20px rgba(37,211,102,0.45);
+            z-index: 9999; transition: transform 0.2s, box-shadow 0.2s;
+            animation: pulse-wa 2.5s infinite;
+        }
+        .whatsapp-float:hover { transform: scale(1.12); box-shadow: 0 10px 30px rgba(37,211,102,0.6); }
+        @keyframes pulse-wa {
+            0%, 100% { box-shadow: 0 6px 20px rgba(37,211,102,0.45); }
+            50% { box-shadow: 0 6px 30px rgba(37,211,102,0.75), 0 0 0 8px rgba(37,211,102,0.12); }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .page-wrapper { grid-template-columns: 1fr; gap: 0; }
+            .sticky-sidebar { position: static; margin-top: 40px; }
+            .details-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .btn-login { display: none; }
+            .page-wrapper { padding: 24px 16px 40px; }
+            .similar-section { padding: 0 16px 50px; }
+            .gallery-wrap { grid-template-columns: 1fr 1fr; grid-template-rows: 180px 140px; }
+            .gallery-wrap .main-img { grid-row: 1; grid-column: 1 / -1; height: 200px; }
+            .features-grid { grid-template-columns: 1fr; }
+            .details-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-body { grid-template-columns: 1fr 1fr; padding: 36px 24px; }
+            .footer-brand { grid-column: 1 / -1; }
+            .footer-top, .footer-bottom { padding: 16px 24px; }
+            .stats-strip { flex-wrap: wrap; }
+            .stat-item { flex: 0 0 calc(50% - 1px); border-bottom: 1px solid #ece8e2; }
+        }
+        @media (max-width: 480px) {
+            .property-title { font-size: 1.5rem; }
+            .details-grid { grid-template-columns: 1fr 1fr; }
+            .footer-body { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <img src="btk.png" alt="BTK Logo">
+            </a>
+            <ul class="nav-links">
+                <li class="nav-item"><a href="index.html">Home</a></li>
+                <li class="nav-item">
+                    <a href="#">Rent <i class="fa-solid fa-chevron-down chevron"></i></a>
+                    <div class="dropdown">
+                        <a href="#"><i class="fa-solid fa-building"></i> Apartment</a>
+                        <a href="#"><i class="fa-solid fa-house"></i> Villa</a>
+                        <a href="#"><i class="fa-solid fa-briefcase"></i> Office</a>
+                        <a href="#"><i class="fa-solid fa-store"></i> Shop</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Sale <i class="fa-solid fa-chevron-down chevron"></i></a>
+                    <div class="dropdown">
+                        <a href="#"><i class="fa-solid fa-building"></i> Apartment</a>
+                        <a href="#"><i class="fa-solid fa-house"></i> Villa</a>
+                        <a href="#"><i class="fa-solid fa-briefcase"></i> Office</a>
+                        <a href="#"><i class="fa-solid fa-store"></i> Shop</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Installments <i class="fa-solid fa-chevron-down chevron"></i></a>
+                    <div class="dropdown">
+                        <a href="#"><i class="fa-solid fa-building"></i> Apartment</a>
+                        <a href="#"><i class="fa-solid fa-house"></i> Villa</a>
+                        <a href="#"><i class="fa-solid fa-briefcase"></i> Office</a>
+                        <a href="#"><i class="fa-solid fa-store"></i> Shop</a>
+                    </div>
+                </li>
+                <li class="nav-item"><a href="#">Guest House</a></li>
+                <li class="nav-item"><a href="#">Blog</a></li>
+                <li class="nav-item">
+                    <a href="#">Contact Us <i class="fa-solid fa-chevron-down chevron"></i></a>
+                    <div class="dropdown">
+                        <a href="#"><i class="fa-solid fa-circle-plus"></i> Publish Property</a>
+                        <a href="#"><i class="fa-solid fa-magnifying-glass"></i> Request Property</a>
+                    </div>
+                </li>
+                <li class="nav-item"><a href="#">About</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="btn-login">Log in</button>
+                <button class="btn-signup">Sign up</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ===== BREADCRUMB ===== -->
+    <div class="breadcrumb-bar">
+        <div class="breadcrumb-inner">
+            <a href="index.html">Home</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <a href="#">Sale</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <a href="#">Precinct 33</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span>Luxury Home – 125 Sq Yds</span>
+        </div>
+    </div>
+
+    <!-- ===== MAIN PAGE ===== -->
+    <div class="page-wrapper">
+
+        <!-- ===== LEFT COLUMN ===== -->
+        <div class="left-col">
+
+            <!-- Badge + Title -->
+            <div class="listing-type-badge"><i class="fa-solid fa-tag"></i> For Sale</div>
+            <h1 class="property-title">Luxury 125 Sq Yds Home with Modern Finishing</h1>
+            <div class="property-location">
+                <i class="fa-solid fa-location-dot"></i>
+                Precinct 33, Bahria Town Karachi, Sindh
+            </div>
+
+            <!-- Quick Stats Strip -->
+            <div class="stats-strip">
+                <div class="stat-item">
+                    <i class="fa-solid fa-bed"></i>
+                    <span class="stat-val">3</span>
+                    <span class="stat-label">Bedrooms</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fa-solid fa-shower"></i>
+                    <span class="stat-val">3</span>
+                    <span class="stat-label">Bathrooms</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fa-solid fa-vector-square"></i>
+                    <span class="stat-val">125</span>
+                    <span class="stat-label">Sq Yards</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <span class="stat-val">G+1</span>
+                    <span class="stat-label">Floors</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fa-solid fa-key"></i>
+                    <span class="stat-val">Ready</span>
+                    <span class="stat-label">Possession</span>
+                </div>
+            </div>
+
+            <!-- Gallery -->
+            <div class="gallery-wrap">
+                <img src="https://picsum.photos/seed/btkhouse1/800/600" alt="Front View" class="main-img">
+                <img src="https://picsum.photos/seed/bedroom1/400/300" alt="Bedroom">
+                <img src="https://picsum.photos/seed/kitchen/400/300" alt="Kitchen">
+                <img src="https://picsum.photos/seed/bath/400/300" alt="Bathroom">
+                <img src="https://picsum.photos/seed/lounge/400/300" alt="Lounge">
+                <button class="gallery-photos-btn">
+                    <i class="fa-solid fa-grid-2"></i> Show all photos
+                </button>
+            </div>
+
+            <!-- Description -->
+            <div class="section-block">
+                <h2 class="section-heading">Description</h2>
+                <p class="description-text">
+                    Experience luxury living in the heart of Precinct 33, Bahria Town Karachi. This beautifully designed double-storey home spans 125 Sq Yards and features premium marble flooring, modern kitchen fittings, and a spacious open-plan lounge. Located just minutes from the main boulevard, the property offers excellent connectivity to schools, hospitals, and commercial areas within BTK.
+                    <br><br>
+                    The home comes with a fully tiled boundary wall, a neatly maintained front lawn, and two covered car parking spaces. With 24/7 security, CCTV coverage, and uninterrupted utility supply — this is an ideal ready-to-move-in option for families seeking a premium lifestyle inside Bahria Town Karachi.
+                </p>
+                <button class="show-more-btn" onclick="this.style.display='none'">
+                    Show more <i class="fa-solid fa-chevron-down"></i>
+                </button>
+            </div>
+
+            <!-- Property Details -->
+            <div class="section-block">
+                <h2 class="section-heading">Property Details</h2>
+                <div class="details-grid">
+                    <div class="detail-card">
+                        <i class="fa-solid fa-tag"></i>
+                        <span class="d-label">Listing Type</span>
+                        <span class="d-val">For Sale</span>
+                    </div>
+                    <div class="detail-card">
+                        <i class="fa-solid fa-house"></i>
+                        <span class="d-label">Property Type</span>
+                        <span class="d-val">Residential Home</span>
+                    </div>
+                    <div class="detail-card">
+                        <i class="fa-solid fa-vector-square"></i>
+                        <span class="d-label">Plot Size</span>
+                        <span class="d-val">125 Sq Yards</span>
+                    </div>
+                    <div class="detail-card">
+                        <i class="fa-solid fa-layer-group"></i>
+                        <span class="d-label">Floors</span>
+                        <span class="d-val">Ground + 1st</span>
+                    </div>
+                    <div class="detail-card">
+                        <i class="fa-solid fa-bed"></i>
+                        <span class="d-label">Bedrooms</span>
+                        <span class="d-val">3 Bedrooms</span>
+                    </div>
+                    <div class="detail-card">
+                        <i class="fa-solid fa-shower"></i>
+                        <span class="d-label">Bathrooms</span>
+                        <span class="d-val">3 Bathrooms</span>
+                    </div>
+                    <div class="detail-card">
+                        <i class="fa-solid fa-couch"></i>
+                        <span class="d-label">Furnishing</span>
+                        <span class="d-val">Partially Furnished</span>
+                    </div>
+                    <div class="detail-card">
+                        <i class="fa-solid fa-key"></i>
+                        <span class="d-label">Possession</span>
+                        <span class="d-val">Ready to Move</span>
+                    </div>
+                    <div class="detail-card">
+                        <i class="fa-solid fa-map-location-dot"></i>
+                        <span class="d-label">Precinct</span>
+                        <span class="d-val">Precinct 33</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features / Amenities -->
+            <div class="section-block">
+                <h2 class="section-heading">Features & Amenities</h2>
+                <div class="features-grid">
+                    <div class="feature-item"><i class="fa-solid fa-car"></i> 2 Car Parking</div>
+                    <div class="feature-item"><i class="fa-solid fa-wind"></i> AC in All Rooms</div>
+                    <div class="feature-item"><i class="fa-solid fa-wifi"></i> Fibre Internet Ready</div>
+                    <div class="feature-item"><i class="fa-solid fa-video"></i> CCTV Cameras</div>
+                    <div class="feature-item"><i class="fa-solid fa-water"></i> Water Filtration</div>
+                    <div class="feature-item"><i class="fa-solid fa-bolt"></i> Solar / Generator</div>
+                    <div class="feature-item"><i class="fa-solid fa-tree"></i> Front Lawn</div>
+                    <div class="feature-item"><i class="fa-solid fa-shield-halved"></i> 24/7 Security</div>
+                    <div class="feature-item"><i class="fa-solid fa-kitchen-set"></i> Modern Kitchen</div>
+                    <div class="feature-item"><i class="fa-solid fa-stairs"></i> Marble Flooring</div>
+                </div>
+            </div>
+
+            <!-- Address + Google Map -->
+            <div class="section-block">
+                <h2 class="section-heading">Address & Location</h2>
+                <div class="map-label">
+                    <i class="fa-solid fa-location-dot"></i>
+                    Precinct 33, Bahria Town Karachi, Super Highway, Sindh
+                </div>
+                <div class="map-container">
+                    <!-- Embedded Google Map — Bahria Town Karachi Precinct 33 area -->
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28984.07478835!2d67.0504!3d25.3614!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x393193ffff2af215%3A0x7abc2c51dd3c5de3!2sBahria%20Town%20Karachi!5e0!3m2!1sen!2s!4v1700000000000"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Property Location Map">
+                    </iframe>
+                </div>
+                <p class="map-disclaimer">
+                    <i class="fa-solid fa-circle-info"></i>
+                    Exact pin location shared after your enquiry is confirmed.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- ===== RIGHT COLUMN — STICKY SIDEBAR ===== -->
+        <div class="right-col">
+            <div class="sticky-sidebar">
+
+                <!-- Price Card -->
+                <div class="price-card">
+                    <div class="price-main">PKR 1.85 Crore</div>
+                    <div class="price-sub">Sale Price</div>
+                    <hr class="price-divider">
+                    <div class="price-row"><span>Base Price</span><span>PKR 1.85 Cr</span></div>
+                    <div class="price-row"><span>Transfer Fee (est.)</span><span>PKR 1.8 Lac</span></div>
+                    <div class="price-row"><span>Agent Commission (1%)</span><span>PKR 1.85 Lac</span></div>
+                    <div class="price-row total"><span>Total (est.)</span><span>PKR 1.88 Crore</span></div>
+                </div>
+
+                <!-- Contact Card -->
+                <div class="contact-card">
+                    <div class="contact-card-title">Posted By</div>
+
+                    <!-- Poster Profile -->
+                    <div class="poster-profile">
+                        <div class="poster-avatar-placeholder">AR</div>
+                        <div>
+                            <div class="poster-name">Ali Raza</div>
+                            <div class="poster-type">Licensed Agent</div>
+                            <div class="poster-meta">BTK Properties · 5 yrs experience</div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="contact-btns">
+                        <button class="btn-call" onclick="window.location='tel:+923001234567'">
+                            <i class="fa-solid fa-phone"></i> Call: +92 300 1234567
+                        </button>
+                        <button class="btn-whatsapp" onclick="window.open('https://wa.me/923001234567?text=Hi, I am interested in the Luxury Home at Precinct 33')">
+                            <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+                        </button>
+                        <button class="btn-email" onclick="window.location='mailto:info@btkproperties.pk'">
+                            <i class="fa-solid fa-envelope"></i> Send Email
+                        </button>
+                    </div>
+
+                    <div class="msg-divider">or send a message</div>
+
+                    <!-- Message Form -->
+                    <div class="msg-form">
+                        <input type="text" placeholder="Your full name" />
+                        <input type="tel" placeholder="Your phone number" />
+                        <select>
+                            <option value="" disabled selected>I am a...</option>
+                            <option>Buyer (Individual)</option>
+                            <option>Investor</option>
+                            <option>Agent / Dealer</option>
+                        </select>
+                        <textarea placeholder="Hi, I'm interested in this property. Please share more details..."></textarea>
+                        <button class="btn-send">
+                            <i class="fa-solid fa-paper-plane"></i> Send Enquiry
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ===== SIMILAR PROPERTIES ===== -->
+    <section class="similar-section">
+        <h2 class="similar-heading">Similar <span>Properties</span></h2>
+        <div class="similar-grid">
+            <div class="similar-card">
+                <div class="similar-img-wrap">
+                    <img src="https://picsum.photos/seed/sim1/400/300" alt="Corner Plot">
+                    <span class="sim-badge">For Sale</span>
+                </div>
+                <div class="similar-card-body">
+                    <div class="similar-card-title">Corner Plot – 250 Sq Yds</div>
+                    <div class="similar-card-loc"><i class="fa-solid fa-location-dot"></i> Precinct 29, BTK</div>
+                    <div class="similar-card-price">PKR 2.10 Cr <span>/ total</span></div>
+                </div>
+            </div>
+            <div class="similar-card">
+                <div class="similar-img-wrap">
+                    <img src="https://picsum.photos/seed/sim2/400/300" alt="Safari Villa">
+                    <span class="sim-badge rent">For Rent</span>
+                </div>
+                <div class="similar-card-body">
+                    <div class="similar-card-title">Safari Villa – Type A</div>
+                    <div class="similar-card-loc"><i class="fa-solid fa-location-dot"></i> Safari Villas, BTK</div>
+                    <div class="similar-card-price">PKR 55,000 <span>/ month</span></div>
+                </div>
+            </div>
+            <div class="similar-card">
+                <div class="similar-img-wrap">
+                    <img src="https://picsum.photos/seed/sim3/400/300" alt="Apartment">
+                    <span class="sim-badge">For Sale</span>
+                </div>
+                <div class="similar-card-body">
+                    <div class="similar-card-title">Penthouse – Golf City</div>
+                    <div class="similar-card-loc"><i class="fa-solid fa-location-dot"></i> Golf City, BTK</div>
+                    <div class="similar-card-price">PKR 1.20 Cr <span>/ total</span></div>
+                </div>
+            </div>
+                        <div class="similar-card">
+                <div class="similar-img-wrap">
+                    <img src="https://picsum.photos/seed/sim2/400/300" alt="Safari Villa">
+                    <span class="sim-badge rent">For Rent</span>
+                </div>
+                <div class="similar-card-body">
+                    <div class="similar-card-title">Safari Villa – Type A</div>
+                    <div class="similar-card-loc"><i class="fa-solid fa-location-dot"></i> Safari Villas, BTK</div>
+                    <div class="similar-card-price">PKR 55,000 <span>/ month</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-top-text">
+                Pakistan's Most Trusted <strong>Bahria Town Karachi</strong> Property & Accounting Portal
+            </div>
+            <div class="footer-socials">
+                <a href="#" class="social-btn" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" class="social-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="social-btn" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" class="social-btn" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="#" class="social-btn" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+        </div>
+        <div class="footer-body">
+            <div class="footer-brand">
+                <div class="logo-wrap"><img src="btk.png" alt="BTK Logo"></div>
+                <p>Your complete guide to buying, renting, and investing in Bahria Town Karachi. We also provide professional accounting, tax filing, and installment management services.</p>
+                <div class="contact-pills">
+                    <a href="tel:+923001234567" class="contact-pill">
+                        <i class="fa-solid fa-phone"></i><span>+92 300 1234567</span>
+                    </a>
+                    <a href="mailto:info@btkproperties.pk" class="contact-pill">
+                        <i class="fa-solid fa-envelope"></i><span>info@btkproperties.pk</span>
+                    </a>
+                    <a href="#" class="contact-pill">
+                        <i class="fa-solid fa-location-dot"></i><span>Main Office, Bahria Town Karachi</span>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Buy Property</a></li>
+                    <li><a href="#">Rent Property</a></li>
+                    <li><a href="#">Installments</a></li>
+                    <li><a href="#">Guest House</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Property Types</h4>
+                <ul>
+                    <li><a href="#">Apartments</a></li>
+                    <li><a href="#">Villas</a></li>
+                    <li><a href="#">Offices</a></li>
+                    <li><a href="#">Shops</a></li>
+                    <li><a href="#">Plots</a></li>
+                    <li><a href="#">Bungalows</a></li>
+                    <li><a href="#">Penthouses</a></li>
+                </ul>
+                <h4 style="margin-top: 24px;">Popular Precincts</h4>
+                <div class="precinct-tags">
+                    <span class="p-tag">P-1</span><span class="p-tag">P-4</span>
+                    <span class="p-tag">P-8</span><span class="p-tag">P-10</span>
+                    <span class="p-tag">P-19</span><span class="p-tag">P-25</span>
+                    <span class="p-tag">P-29</span><span class="p-tag">P-33</span>
+                    <span class="p-tag">Safari</span><span class="p-tag">Golf City</span>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Stay Updated</h4>
+                <div class="newsletter-box">
+                    <p>Get the latest BTK property listings and accounting tips straight to your inbox.</p>
+                    <div class="newsletter-form">
+                        <input type="text" placeholder="Your name">
+                        <input type="email" placeholder="Email address">
+                        <button type="button"><i class="fa-solid fa-paper-plane"></i> Subscribe</button>
+                    </div>
+                </div>
+                <h4 style="margin-top: 24px;">Accounting Services</h4>
+                <ul>
+                    <li><a href="#">Tax Filing (FBR)</a></li>
+                    <li><a href="#">Installment Tracking</a></li>
+                    <li><a href="#">Property Ledger</a></li>
+                    <li><a href="#">Business Registration</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr class="footer-divider">
+        <div class="footer-bottom">
+            <div class="footer-copyright">
+                &copy; 2025 <span>Bahria Town Karachi Properties</span>. All Rights Reserved.
+            </div>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+                <a href="#">Disclaimer</a>
+                <a href="#">Sitemap</a>
+            </div>
+            <div class="footer-badge">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp Support Available
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/923001234567" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+</body>
+</html>
