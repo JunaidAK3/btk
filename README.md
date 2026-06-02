@@ -22,7 +22,7 @@ A modern Real Estate web application built with **Next.js 16.2.6**, **TypeScript
 
 ## Tech Stack
 
-* Next.js 14
+* Next.js 16
 * TypeScript
 * Tailwind CSS
 * React
